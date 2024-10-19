@@ -9,16 +9,7 @@ load_dotenv()
 PDF_PATH = os.getenv("PDF_PATH")
 PRINTER_NAME = os.getenv("PRINTER_NAME")
 
-# 配置日志记录
-logging.basicConfig(
-    filename='print_pdf.log',  # 日志文件名
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('print_pdf.log'),  # 写入日志文件
-        logging.StreamHandler()  # 同时输出到控制台
-    ]
-)
+
 
 def print_pdf_file(filepath):
     """使用 CUPS 打印指定的 PDF 文件"""
