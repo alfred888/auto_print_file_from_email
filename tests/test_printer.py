@@ -28,5 +28,5 @@ def print_test_file(printer_name, pdf_path=TEST_PDF):
 
 if __name__ == "__main__":
     # 替换为实际的打印机名称
-    PRINTER_NAME = "Lenovo_LJ2268W__FE_37_35"
+    PRINTER_NAME = "Lenovo_LJ2268W_FE_37_35"
     print_test_file(PRINTER_NAME)
