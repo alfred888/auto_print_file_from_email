@@ -9,12 +9,6 @@ load_dotenv()
 PDF_PATH = os.getenv("PDF_PATH")
 PRINTER_NAME = "Lenovo_LJ2268W__FE_37_35_"
 
-# 配置日志记录
-logging.basicConfig(
-    filename='printer.log',  # 日志文件名
-    level=logging.INFO,       # 日志级别
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
 def print_pdf_file(filepath):
     """使用 CUPS 打印指定的 PDF 文件"""

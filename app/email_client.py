@@ -8,12 +8,6 @@ import logging
 from datetime import datetime
 from config import EMAIL, PASSWORD, IMAP_SERVER, PDF_PATH
 
-# 配置日志记录
-logging.basicConfig(
-    filename='email_client.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
 # 配置IMAP服务器
 IMAP_PORT = 993
