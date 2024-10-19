@@ -55,7 +55,7 @@ def print_and_backup_pdfs():
                 print_pdf_file(filepath)
 
                 # 打印完成后重命名
-                # rename_file(filepath)
+                rename_file(filepath)
 
     logging.info("所有文件处理完成。")
 
