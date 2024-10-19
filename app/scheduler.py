@@ -1,6 +1,7 @@
 import schedule
 import time
-from app.email_client import connect_to_email, fetch_unread_emails, parse_and_download_attachments, logout
+
+from email_client import connect_to_email, fetch_unread_emails, parse_and_download_attachments, logout
 
 def job():
     """定时任务：读取邮件并保存符合条件的附件"""
