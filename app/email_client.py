@@ -80,10 +80,11 @@ def parse_and_download_attachments(msg):
             filename = decode_header(part.get_filename())[0][0]
             if isinstance(filename, bytes):
                 filename = filename.decode()
-
+            # 生成带毫秒的时间戳
+            now = datetime.now()
             # 去掉原文件名的 .pdf 后缀并添加时间戳
             base_filename = filename[:-4]  # 去掉 ".pdf"
-            timestamp = datetime.now().strftime("%Y_%m_%d_%H%M")
+            timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S") + f"_{int(now.microsecond / 1000):03d}"
             filename_with_timestamp = f"{base_filename}_{timestamp}.pdf"
 
             # 拼接保存路径
@@ -98,33 +99,33 @@ def parse_and_download_attachments(msg):
 
     return attachments
 
-def logout(mail):
-    """断开IMAP连接"""
-    mail.logout()
-    print("Logged out from IMAP server.")
-    # 遍历邮件的内容部分
-    attachments = []
-    for part in msg.walk():
-        content_disposition = str(part.get("Content-Disposition", ""))
-        if "attachment" in content_disposition:
-            # 下载附件
-            filename = decode_header(part.get_filename())[0][0]
-            if isinstance(filename, bytes):
-                filename = filename.decode()
-
-            filepath = os.path.join(ATTACHMENT_DIR, filename)
-            with open(filepath, "wb") as f:
-                f.write(part.get_payload(decode=True))
-                print(f"Downloaded attachment: {filepath}")
-                attachments.append(filepath)
-
-        elif part.get_content_type() == 'text/plain':
-            charset = part.get_content_charset() or 'utf-8'
-            content = part.get_payload(decode=True).decode(charset)
-            print('Content:', content)
-            print('---------------------------------')
-
-    return {"subject": subject, "from": from_, "attachments": attachments}
+# def logout(mail):
+#     """断开IMAP连接"""
+#     mail.logout()
+#     print("Logged out from IMAP server.")
+#     # 遍历邮件的内容部分
+#     attachments = []
+#     for part in msg.walk():
+#         content_disposition = str(part.get("Content-Disposition", ""))
+#         if "attachment" in content_disposition:
+#             # 下载附件
+#             filename = decode_header(part.get_filename())[0][0]
+#             if isinstance(filename, bytes):
+#                 filename = filename.decode()
+#
+#             filepath = os.path.join(ATTACHMENT_DIR, filename)
+#             with open(filepath, "wb") as f:
+#                 f.write(part.get_payload(decode=True))
+#                 print(f"Downloaded attachment: {filepath}")
+#                 attachments.append(filepath)
+#
+#         elif part.get_content_type() == 'text/plain':
+#             charset = part.get_content_charset() or 'utf-8'
+#             content = part.get_payload(decode=True).decode(charset)
+#             print('Content:', content)
+#             print('---------------------------------')
+#
+#     return {"subject": subject, "from": from_, "attachments": attachments}
 def logout(mail):
     """断开IMAP连接"""
     mail.logout()
