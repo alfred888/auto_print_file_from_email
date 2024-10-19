@@ -9,6 +9,16 @@ load_dotenv()
 PDF_PATH = os.getenv("PDF_PATH")
 PRINTER_NAME = "Lenovo_LJ2268W__FE_37_35_"
 
+# 配置日志记录
+logging.basicConfig(
+    filename='print_pdf.log',  # 日志文件名
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('print_pdf.log'),  # 写入日志文件
+        logging.StreamHandler()  # 同时输出到控制台
+    ]
+)
 
 def print_pdf_file(filepath):
     """使用 CUPS 打印指定的 PDF 文件"""
@@ -32,12 +42,13 @@ def print_pdf_file(filepath):
 
 def rename_file(filepath):
     """将已打印的 PDF 文件重命名为 .bak"""
-    new_filepath = filepath + ""
+    new_filepath = filepath + ".bak"
     logging.info(f"等待 30 秒后重命名文件：{filepath}")
     time.sleep(30)  # 等待 30 秒
+
     try:
         os.rename(filepath, new_filepath)
-        logging.info(f"文件已重命名：{new_filepath}")
+        logging.info(f"文件已重命名为：{new_filepath}")
     except Exception as e:
         logging.error(f"重命名失败：{e}")
 
@@ -53,7 +64,7 @@ def print_and_backup_pdfs():
                 print_pdf_file(filepath)
 
                 # 打印完成后重命名
-                rename_file(filepath)
+                # rename_file(filepath)
 
     logging.info("所有文件处理完成。")
 
