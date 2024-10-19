@@ -1,5 +1,6 @@
 import os
 import cups
+import time
 from dotenv import load_dotenv
 
 # 加载 .env 文件中的配置
@@ -30,6 +31,7 @@ def print_pdf_file(filepath):
 def rename_file(filepath):
     """将已打印的 PDF 文件重命名为 .bak"""
     new_filepath = filepath + ".bak"
+    time.sleep(10)  # 等待 10 秒
     os.rename(filepath, new_filepath)
     print(f"文件已重命名：{new_filepath}")
 
