@@ -1,6 +1,6 @@
 import schedule
 import time
-from app.print_pdf import print_and_backup_pdfs
+from print_pdf import print_and_backup_pdfs
 
 def job():
     """定时任务：打印所有 PDF 并重命名为 .bak"""
