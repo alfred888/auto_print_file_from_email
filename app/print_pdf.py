@@ -32,12 +32,12 @@ def print_pdf_file(filepath):
 
 def rename_file(filepath):
     """将已打印的 PDF 文件重命名为 .bak"""
-    new_filepath = filepath + ".bak"
+    new_filepath = filepath + ""
     logging.info(f"等待 30 秒后重命名文件：{filepath}")
     time.sleep(30)  # 等待 30 秒
     try:
-        #os.rename(filepath, new_filepath)
-        #logging.info(f"文件已重命名：{new_filepath}")
+        os.rename(filepath, new_filepath)
+        logging.info(f"文件已重命名：{new_filepath}")
     except Exception as e:
         logging.error(f"重命名失败：{e}")
 
