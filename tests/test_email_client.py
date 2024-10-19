@@ -1,6 +1,11 @@
 import imaplib
 import email
 from email.header import decode_header
+import sys
+import os
+# 将项目根目录添加到 PYTHONPATH
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from app.config import EMAIL, PASSWORD, IMAP_SERVER
 
 # 163邮箱的IMAP服务器地址和端口
