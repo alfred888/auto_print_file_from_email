@@ -30,8 +30,8 @@ def print_job():
 
 def start_scheduler():
     """启动定时任务"""
-    schedule.every(30).seconds.do(email_job)  # 每 30 秒执行一次邮件任务
-    schedule.every(1).minutes.do(print_job)  # 每 1 分钟执行一次打印任务
+    schedule.every(300).seconds.do(email_job)  # 每 30 秒执行一次邮件任务
+    schedule.every(10).minutes.do(print_job)  # 每 1 分钟执行一次打印任务
 
     logging.info("Scheduler started. Running tasks at defined intervals.")
 
