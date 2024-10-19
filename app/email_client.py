@@ -3,6 +3,7 @@ import email
 from email.header import decode_header
 from email.utils import parseaddr
 import os
+import re
 from datetime import datetime
 
 from config import EMAIL, PASSWORD, IMAP_SERVER, PDF_PATH
@@ -59,6 +60,14 @@ def fetch_email(mail, email_id):
     msg = email.message_from_bytes(msg_data[0][1])
     return msg
 
+def sanitize_filename(filename):
+    """移除文件名中的空格和特殊字符"""
+    # 使用正则表达式替换所有非字母、数字、下划线或连字符的字符为空字符串
+    sanitized = re.sub(r'[^\w\-]', '_', filename)
+    return sanitized
+
+
+
 def parse_and_download_attachments(msg):
     """解析邮件内容并下载附件（仅当主题符合条件时）"""
     subject, encoding = decode_header(msg['Subject'])[0]
@@ -84,8 +93,10 @@ def parse_and_download_attachments(msg):
             now = datetime.now()
             # 去掉原文件名的 .pdf 后缀并添加时间戳
             base_filename = filename[:-4]  # 去掉 ".pdf"
-            timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S") + f"_{int(now.microsecond / 1000):03d}"
-            filename_with_timestamp = f"{base_filename}_{timestamp}.pdf"
+            timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
+            # 清理文件名，去掉空格和特殊字符
+            sanitized_filename = sanitize_filename(base_filename)
+            filename_with_timestamp = f"{sanitized_filename}_{timestamp}.pdf"
 
             # 拼接保存路径
             filepath = os.path.join(PDF_PATH, filename_with_timestamp)
