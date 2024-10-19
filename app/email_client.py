@@ -5,7 +5,7 @@ from email.utils import parseaddr
 import os
 from datetime import datetime
 
-from app.config import EMAIL, PASSWORD, IMAP_SERVER, PDF_PATH
+from config import EMAIL, PASSWORD, IMAP_SERVER, PDF_PATH
 
 # 配置IMAP服务器
 IMAP_SERVER = 'imap.163.com'
