@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # 加载 .env 文件中的配置
 load_dotenv()
 PDF_PATH = os.getenv("PDF_PATH")
-PRINTER_NAME = "Lenovo_LJ2268W__FE_37_35_"
+PRINTER_NAME = os.getenv("PRINTER_NAME")
 
 # 配置日志记录
 logging.basicConfig(
