@@ -2,7 +2,7 @@ import cups
 import os
 
 # 测试文件路径：确保该路径下有一个 PDF 文件
-TEST_PDF = "/Users/yafei/workspace/AutoPrintFileFromEmail/attachments/test.pdf"
+TEST_PDF = "/home/max/email_attachments/Notebook1014_2024_10_19_165536_150.pdf"
 
 def print_test_file(printer_name, pdf_path=TEST_PDF):
     """使用 CUPS 打印测试 PDF 文件"""
