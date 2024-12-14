@@ -8,7 +8,7 @@ PROJECT_STRUCTURE = [
     "app/__init__.py",
     "app/email_client.py",
     "app/attachment_handler.py",
-    "app/scheduler.py",
+    "app/print_timer.py",
     "app/config.py",
     "tests/__init__.py",
     "tests/test_email_client.py",
